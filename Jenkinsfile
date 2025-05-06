@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('Build Maven'){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: 'master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Techihub99/SpringbootDockerPipelineApp.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: 'master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/techigit/SpringbootDockerPipelineApp.git']]])
                 bat 'mvn clean install'
             }
         }
@@ -19,8 +19,8 @@ pipeline {
             steps{
                 script{
                 
-                   withCredentials([usernamePassword(credentialsId: 'javatechidockerhub', passwordVariable: 'javatechidockerhub', usernameVariable: 'thrishank99')]) {
-                   bat "docker login -u ${env.thrishank99} -p ${env.javatechidockerhub}"
+                   withCredentials([usernamePassword(credentialsId: 'javatechidockerpwd', passwordVariable: 'javatechidockerpwd', usernameVariable: 'thrishank99')]) {
+                   bat "docker login -u ${env.thrishank99} -p ${env.javatechidockerpwd}"
 }
                   bat 'docker push thrishank99/springboot-docker-jenkin-cicd'
                 }
